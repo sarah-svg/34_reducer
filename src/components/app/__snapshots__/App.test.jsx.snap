@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`App component renders App 1`] = `
+exports[`App component takes a snapshot test of App 1`] = `
 <DocumentFragment>
   <button>
     undo
@@ -9,10 +9,12 @@ exports[`App component renders App 1`] = `
     redo
   </button>
   <input
+    data-testid="current"
     type="color"
     value="#FF0000"
   />
   <div
+    data-testid="display"
     style="background-color: rgb(255, 0, 0); width: 10rem; height: 10rem;"
   />
 </DocumentFragment>
