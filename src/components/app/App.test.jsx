@@ -56,7 +56,4 @@ describe('App component', () => {
       backgroundColor: '#FF0000',
     });
   });
-
-
-
 });
