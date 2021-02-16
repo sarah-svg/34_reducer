@@ -29,4 +29,26 @@ describe('App component', () => {
       backgroundColor: '#FF0000',
     });
   });
+
+  it('checks the current color', async() => {
+    render(<App />);
+
+    const current = screen.getByTestId('before');
+    
+    fireEvent.change(current, {
+      target: {
+        value: '#00FF00'
+      }
+    });
+
+    const display = await screen.findByTestId('display');
+        
+    expect(display).toHaveStyle({
+      backgroundColor: '#FF0000',
+    });
+  });
+
+
+
+
 });

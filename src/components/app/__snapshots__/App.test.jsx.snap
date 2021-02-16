@@ -2,10 +2,14 @@
 
 exports[`App component takes a snapshot test of App 1`] = `
 <DocumentFragment>
-  <button>
+  <button
+    data-testid="before"
+  >
     undo
   </button>
-  <button>
+  <button
+    data-testid="after"
+  >
     redo
   </button>
   <input
