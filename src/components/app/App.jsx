@@ -1,49 +1,44 @@
 /* eslint-disable max-len */
-import React, { useState } from 'react';
 
-const useRecord = (init) => {
-  const [before, setBefore] = useState([]);
-  const [current, setCurrent] = useState(init);
-  const [after, setAfter] = useState([]);
+
+
+/* eslint-disable max-len */
+import React, { useReducer } from 'react';
+import colorReducer, { initialState } from '../../reducers/colorReducer';
+
+
+
+const App = () => {
+  const [state, dispatch] = useReducer(colorReducer, initialState);
 
   const undo = () => {
-    setAfter(after => [current, ...after]);
-    setCurrent(before[before.length - 1]);
-    setBefore(before => before.slice(0, -1));
-  };
+    dispatch({
+      type: 'undo',
 
+    });
+  };
   const redo = () => {
-    setBefore(before => [...before, current]);
-    setCurrent(after[0]);
-    setAfter(after => after.slice(1));
+    dispatch({
+      type: 'redo',
+        
+    });
   };
-
-  const record = val => {
-    setBefore(before => [...before, current]);
-    setCurrent(val);
-  };
-
-  return {
-    undo,
-    record,
-    redo,
-    current,
-  };
-};
-
-function App() {
-  const { current, undo, redo, record } = useRecord('#FF0000');
-
+  //   console.log(state);
   return (
-    <>
-      <button data-testid="before" onClick={undo}>undo</button>
-      <button data-testid="after" onClick={redo}>redo</button>
-      <input data-testid="current" type="color" value={current}
-        onChange={({ target }) => record(target.value)} />
-      <div  data-testid="display" style={{ backgroundColor: current, width: '10rem', height: '10rem' }}>
-      </div>
-    </>
-  );
-}
+    <> 
+
+      <>
+        <button disabled={!state.before.length} data-testid="before" onClick={undo}>undo</button>
+        <button disabled={!state.after.length} data-testid="after" onClick={redo}>redo</button>
+        <input data-testid="current" id="current" type="color" value={state.current}
+          onChange={({ target }) => { dispatch({ type: target.id, payload: target.value }), console.log(target.value);}} />
+        <div  data-testid="display"
+          style={{ backgroundColor: state.current, width: '10rem', height: '10rem' }}>
+        </div>
+      </>
+    </>);
+
+
+};
 
 export default App;
