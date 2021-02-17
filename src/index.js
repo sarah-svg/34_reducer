@@ -1,9 +1,8 @@
 import React from 'react';
 import { render } from 'react-dom';
-// import App from './components/app/App';
-import ColorPage from './components/app/colorPage/ColorPage';
+import App from './components/app/App';
 
 render(
-  <ColorPage />,
+  <App />,
   document.getElementById('root')
 );
