@@ -1,19 +1,20 @@
   
 import React from 'react';
 import { render, screen, fireEvent, cleanup } from '@testing-library/react';
-import App from './App';
+
+import ColorPage from './colorPage/ColorPage';
 
 describe('App component', () => {
   afterEach(() => cleanup());
   
   it('takes a snapshot test of App', async() => {
-    const { asFragment } = render(<App />);
+    const { asFragment } = render(<ColorPage />);
     expect(asFragment()).toMatchSnapshot();
 
   });
 
   it('checks the current color', async() => {
-    render(<App />);
+    render(<ColorPage />);
     const current = screen.getByTestId('current');
     fireEvent.change(current, {
       target: {
@@ -28,7 +29,7 @@ describe('App component', () => {
   });
 
   it('checks the current color after hitting the undo button', async() => {
-    render(<App />);
+    render(<ColorPage />);
     const current = screen.getByTestId('before');
     fireEvent.change(current, {
       target: {
@@ -43,7 +44,7 @@ describe('App component', () => {
   });
 
   it('checks the current color after hitting the redo button', async() => {
-    render(<App />);
+    render(<ColorPage/>);
     const current = screen.getByTestId('after');
     fireEvent.change(current, {
       target: {
